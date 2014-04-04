@@ -5,9 +5,26 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style type="text/css">
-        * { margin: 0;padding: 0;cursor: default; }
-        html { font-family: sans-serif;font-size: 16px;color: #555; }
-        body { width: 100%;height: 100%;background-color: white;position: absolute; }
+        * {
+			margin: 0;
+			padding: 0;
+			cursor: default;
+		}
+        html {
+			font-family: sans-serif;
+			font-size: 16px;
+			color: #555;
+			
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			user-select: none;
+		}
+        body {
+			width: 100%;
+			height: 100%;
+			background-color: white;
+			position: absolute;
+		}
 
         #gore {
             
@@ -42,7 +59,15 @@
             margin-right: 6px;
 			margin-bottom: 6px;
             background-color: #f7f5f5;
+			-webkit-transition-property: -webkit-transform, border-color, color;
+			-webkit-transition-duration: 0.4s;
+			-webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
         }
+		.ocena.x{
+			-webkit-transform: scale3d(0, 0, 0) !important;
+			border-color: red !important;
+			color: red !important;
+		}
 		.ocena.active{
 			background-color:red;
 			color:white;
@@ -98,7 +123,11 @@
 		
 		function TapEndBroj(){
 			var broj = $(this).removeClass('active').text();
-			$ocene.append('<div class="ocena">'+broj+'</div>');
+			var $o = $('<div class="ocena x">'+broj+'</div>');
+			$ocene.append($o);
+			setTimeout(function(){
+				$o.removeClass('x')
+			}, 10);
 			PreracunajSrednjuOcenu();
 		}
 		
