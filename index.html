@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Moja ocena</title>
+    <title>Ocenjivač</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style type="text/css">
@@ -96,10 +96,12 @@
 			font-size: 36px;
 			padding: 5px 10px 0;	
 		}
+        .dugme.active {
+            color: red;
+        }
 
         .clear {clear: both;}
     </style>
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>-->
     <script src="angular.min.js"></script>
     <script type="text/javascript">
         var app = angular.module('app', []);
@@ -152,7 +154,7 @@
         <div id="gore">
             
             <section id="heder">
-                <div class="dugme" id="dugmePonisti" ng-click="ponistiOcene()">PONIŠTI</div>
+                <div class="dugme" id="dugmePonisti" ng-tap="ponistiOcene()">PONIŠTI</div>
             </section>
             
             <div class="clear"></div>
