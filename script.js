@@ -20,7 +20,7 @@ app.directive('ngTap', function () {
 
 // MAIN
 app.controller('MainController', function($scope){
-    $scope.tab = 1;    
+    $scope.tab = 2;    
     $scope.promeniTab = function(tab){
         $scope.tab = tab;
     };
