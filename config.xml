@@ -4,12 +4,12 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "info.igordedic.ocenjivac"
-        version   = "1.1.1">
+        version   = "1.2.0">
 
     <name>Ocenjivač</name>
 
     <description>
-        Helper aplikacija za zaključivanje ocena. Za Jelu :)
+        Helper aplikacija za Jelinu školu :)
     </description>
 
     <author href="http://igordedic.info" email="igdedic@gmail.com">

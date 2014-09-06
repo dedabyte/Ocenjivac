@@ -1,189 +1,90 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Ocenjivač</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <style type="text/css">
-        * {
-			margin: 0;
-			padding: 0;
-			cursor: default;
-		}
-        html {
-			font-family: sans-serif;
-			font-size: 16px;
-			color: #555;
-			
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			user-select: none;
-		}
-        body {
-			width: 100%;
-			height: 100%;
-			background-color: white;
-			position: absolute;
-		}
-
-        #gore {
-            
-        }
-        #heder {
-            background-color: #444;
-            color: #eee;
-            height: 50px;
-        }
-        #heder img {
-            display: inline-block;
-            float: right;
-            margin: 4px;
-            height: 42px;
-        }
-        #heder h1 {
-            float: left;
-            margin-left: 4px;
-            font-weight: 300;
-            font-size: 32px;
-        }
-
-        #ocene {
-            overflow: auto;
-            margin: 4px;
-        }
-        .ocena {
-            font-size: 40px;
-            padding: 0 12px 3px;
-            float: left;
-            border: 1px solid #dfdfdf;
-            margin-right: 6px;
-			margin-bottom: 6px;
-            background-color: #f7f5f5;
-        }
-		.ocena.active{
-			background-color:red;
-			color:white;
-		}
-
-        #dole {
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-        }
-        #ocenaWrap {
-            font-size: 150px;
-            text-align: right;
-        }
-
-        #brojevi {
-            width: 100%;
-            border-top: 1px solid #dfdfdf;
-            text-align: center;
-            border-spacing: 0;
-        }
-        #brojevi td {
-            font-size: 100px;
-            border-right: 1px solid #dfdfdf;
-            background-image: -webkit-gradient(linear,0 0,0 100%,from(white),to(#d0d0d0));
-        }
-		#brojevi td.active {
-			color:white;
-            background-image: -webkit-gradient(linear,0 0,0 100%,from(#444),to(#999));
-        }
-		
-		.dugme{
-			float: right;
-			font-size: 36px;
-			padding: 5px 10px 0;	
-		}
-        .dugme.active {
-            color: red;
-        }
-
-        .clear {clear: both;}
-    </style>
-    <script src="angular.min.js"></script>
-    <script type="text/javascript">
-        var app = angular.module('app', []);
-
-        app.directive('ngTap', function () {
-            return function (scope, element, attrs) {
-                var tapping = false;
-                element.bind('touchstart', function (e) {
-                    element.addClass('active');
-                    tapping = true;
-                });
-                element.bind('touchend', function (e) {
-                    element.removeClass('active');
-                    if (tapping) {
-                        scope.$apply(attrs['ngTap'], element);
-                    }
-                });
-            };
-        });
-
-        app.controller('MainController', function ($scope) {
-            $scope.ocene = [];
-
-            $scope.ponistiOcene = function () {
-                $scope.ocene = [];
-            }
-
-            $scope.dodajOcenu = function (ocena) {
-                $scope.ocene.push(ocena);
-            }
-
-            $scope.izracunajProsek = function () {
-                var suma = 0,
-                    brojOcena = $scope.ocene.length;
-                for (var i = 0; i < brojOcena; i++) {
-                    suma += $scope.ocene[i];
-                }                
-                return brojOcena ? Math.round(suma / brojOcena * 100) / 100 : '';
-            };
-
-            $scope.obrisiOcenu = function (idx) {
-                $scope.ocene.splice(idx, 1);
-            }            
-        });
-
-    </script>
-</head>
+    <head>
+        <title>Ocenjivač</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="angular.min.js"></script>
+        <script src="script.js"></script>
+    </head>
+    
     <body ng-app="app" ng-controller="MainController">
         
-        <div id="gore">
-            
-            <section id="heder">
-                <div class="dugme" id="dugmePonisti" ng-tap="ponistiOcene()">PONIŠTI</div>
-            </section>
-            
-            <div class="clear"></div>
-
-            <section id="ocene">
-                <div class="ocena" ng-repeat="oc in ocene track by $index" ng-tap="obrisiOcenu($index)">{{oc}}</div>
-            </section>
-
+        <div id="tabs">
+            <div id="tab1" class="tab" ng-tap="promeniTab(1)" ng-class="{selected: tab == 1}">OCENJIVAČ</div>
+            <div id="tab2" class="tab" ng-tap="promeniTab(2)" ng-class="{selected: tab == 2}">RASPORED</div>
         </div>
         
-
-        <div id="dole">
-            
-            <section id="ocenaWrap">
-                <div id="ocena">{{izracunajProsek()}}</div>
+        <div id="ocenjivacWrap" ng-controller="OcenjivacController" ng-show="tab == 1">
+            <div id="gore">            
+<!--
+                <section id="heder">
+                    <div class="dugme" id="dugmePonisti" ng-tap="ponistiOcene()">PONIŠTI</div>
+                </section>            
+                <div class="clear"></div>
+-->
+                <div id="hederLine"></div>
+                <section id="ocene">
+                    <div class="ocena x" ng-tap="ponistiOcene($index)">X</div>
+                    <div class="ocena" ng-repeat="oc in ocene track by $index" ng-tap="obrisiOcenu($index)">{{oc}}</div>
+                </section>
+            </div>
+            <div id="dole">            
+                <section id="ocenaWrap">
+                    <div id="ocena">{{izracunajProsek() | number:2}}</div>
+                </section>            
+                <table id="brojevi">
+                    <tbody>
+                        <tr>
+                            <td ng-tap="dodajOcenu(1)">1</td>
+                            <td ng-tap="dodajOcenu(2)">2</td>
+                            <td ng-tap="dodajOcenu(3)">3</td>
+                            <td ng-tap="dodajOcenu(4)">4</td>
+                            <td ng-tap="dodajOcenu(5)" style="border: none">5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div id="rasporedWrap" ng-controller="RasporedController" ng-show="tab == 2">
+            <header>
+                <table class="header-table">
+                    <tbody>
+                        <tr>
+                            <td class="shift-switcher" ng-tap="promeniSmenu()"><small>SMENA</small> {{ data.smena }}</td>
+        <!--                    <td class="day" ng-tap="promeniDan('pon')" ng-class="{selected: data.dan == 'pon'}">PON</td>-->
+                            <td class="day" ng-tap="promeniDan('uto')" ng-class="{selected: data.dan == 'uto'}">UTO</td>
+                            <td class="day" ng-tap="promeniDan('sre')" ng-class="{selected: data.dan == 'sre'}">SRE</td>
+                            <td class="day" ng-tap="promeniDan('cet')" ng-class="{selected: data.dan == 'cet'}">ČET</td>
+        <!--                    <td class="day" ng-tap="promeniDan('pet')" ng-class="{selected: data.dan == 'pet'}">PET</td>-->
+                            <td class="length-switcher" ng-tap="promeniTipSmene()"><small>{{data.tipSmene}}</small></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </header>
+            <section>        
+                <table class="schedule-table" ng-show="data[data.dan]">
+                    <thead>
+                        <th style="width:10%">#</th>
+                        <th>OD</th>
+                        <th>DO</th>
+                        <th><small>razred</small></th>
+                        <th><small>učionica</small></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in data[data.dan] track by $index">
+                            <td>{{$index+1}}.</td>
+                            <td>{{getVremeCasa($index+1, true)}}</td>
+                            <td>{{getVremeCasa($index+1, false)}}</td>
+                            <td>{{item.razred}}</td>
+                            <td>{{item.ucionica}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="msg" ng-show="!data[data.dan]">Ti danas ne radiš... :)</div>
             </section>
-            
-            <table id="brojevi">
-                <tbody>
-                    <tr>
-                        <td ng-tap="dodajOcenu(1)">1</td>
-                        <td ng-tap="dodajOcenu(2)">2</td>
-                        <td ng-tap="dodajOcenu(3)">3</td>
-                        <td ng-tap="dodajOcenu(4)">4</td>
-                        <td ng-tap="dodajOcenu(5)" style="border: none">5</td>
-                    </tr>
-                </tbody>
-            </table>
-
         </div>
         
     </body>
