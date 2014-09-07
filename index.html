@@ -67,14 +67,16 @@
             <section>        
                 <table class="schedule-table" ng-show="data[data.dan]">
                     <thead>
-                        <th style="width:10%">#</th>
-                        <th>OD</th>
-                        <th>DO</th>
-                        <th><small>razred</small></th>
-                        <th><small>učionica</small></th>
+                        <tr>
+                            <th style="width:10%">#</th>
+                            <th>OD</th>
+                            <th>DO</th>
+                            <th><small>razred</small></th>
+                            <th><small>učionica</small></th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in data[data.dan] track by $index">
+                        <tr ng-repeat="item in data[data.dan] track by $index" ng-class="{myClass: item.razred}">
                             <td>{{$index+1}}.</td>
                             <td>{{getVremeCasa($index+1, true)}}</td>
                             <td>{{getVremeCasa($index+1, false)}}</td>

@@ -197,6 +197,10 @@ header{
     border-bottom: 1px solid #dfdfdf;
 }
 
+.myClass{
+    background-color: rgba(142, 68, 173, 0.08);
+}
+
 .msg{
     text-align: center;
     font-size: 26px;

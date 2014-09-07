@@ -2,16 +2,12 @@ var app = angular.module('app', []);
 
 app.directive('ngTap', function () {
     return function (scope, element, attrs) {
-        var tapping = false;
         element.bind('touchstart', function (e) {
             element.addClass('active');
-            tapping = true;
         });
         element.bind('touchend', function (e) {
             element.removeClass('active');
-            if (tapping) {
-                scope.$apply(attrs['ngTap'], element);
-            }
+            scope.$apply(attrs['ngTap'], element);
         });
     };
 });
@@ -54,16 +50,16 @@ app.controller('OcenjivacController', function ($scope) {
 
 
 // RASPORED
-app.service('DataSvc', function () {
+app.service('RasporedSvc', function () {
     function vratiSmenu() {
         // --- get week nuber - http://stackoverflow.com/a/6117889
         var d = new Date();
         d.setHours(0,0,0);
         d.setDate(d.getDate() + 4 - (d.getDay()||7));
         var yearStart = new Date(d.getFullYear(),0,1);
-        var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7)
+        var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
         // ---
-        return weekNo % 2 === 0 ? '1' : '2'; // parna prepodne, neparna popodne
+        return weekNo % 2 === 0 ? '1' : '2'; // parna prepodne (prva smena, 1), neparna popodne (druga smena, 2)
     }
     
     var dani = ['pon','uto','sre','cet','pet'];
@@ -114,7 +110,7 @@ app.service('DataSvc', function () {
         }
     };
     
-    var dataSvc = { 
+    var rasporedSvc = { 
         smena: vratiSmenu(),
         tipSmene: 'normalno',
         dan: vratiDanasnjiDan(),
@@ -125,28 +121,48 @@ app.service('DataSvc', function () {
         //pet: [{},{},{},{},{},{},{}],        
         getVremeCasa: function(redniBrojCasa, isPocetak){
             var pocetakKraj = isPocetak ? 'start' : 'end';
-            return smene[dataSvc.tipSmene][dataSvc.smena][redniBrojCasa][pocetakKraj] || '';
+            return smene[rasporedSvc.tipSmene][rasporedSvc.smena][redniBrojCasa][pocetakKraj] || '';
         },
         promeniSmenu: function(){
-            if(dataSvc.smena == '1') dataSvc.smena = '2';
-            else dataSvc.smena = '1';
+            if(rasporedSvc.smena == '1') rasporedSvc.smena = '2';
+            else rasporedSvc.smena = '1';
         },
         promeniTipSmene: function(){
-            if(dataSvc.tipSmene == 'normalno') dataSvc.tipSmene = 'skraceno';
-            else dataSvc.tipSmene = 'normalno';
+            if(rasporedSvc.tipSmene == 'normalno') rasporedSvc.tipSmene = 'skraceno';
+            else rasporedSvc.tipSmene = 'normalno';
         },
         promeniDan: function(dan){
-            dataSvc.dan = dan;
-        },
+            rasporedSvc.dan = dan;
+        }
     };
     
-    return dataSvc;
+    return rasporedSvc;
 });
 
-app.controller('RasporedController', function ($scope, DataSvc) {
-    $scope.data = DataSvc;
-    $scope.getVremeCasa = DataSvc.getVremeCasa;
-    $scope.promeniSmenu = DataSvc.promeniSmenu;
-    $scope.promeniTipSmene = DataSvc.promeniTipSmene;
-    $scope.promeniDan = DataSvc.promeniDan;
+app.controller('RasporedController', function ($scope, RasporedSvc) {
+    $scope.data = RasporedSvc;
+    $scope.getVremeCasa = RasporedSvc.getVremeCasa;
+    $scope.promeniSmenu = RasporedSvc.promeniSmenu;
+    $scope.promeniTipSmene = RasporedSvc.promeniTipSmene;
+    $scope.promeniDan = RasporedSvc.promeniDan;
 });
+
+
+
+
+
+//app.directive('ngTap', function () {
+//    return function (scope, element, attrs) {
+//        var tapping = false;
+//        element.bind('touchstart', function (e) {
+//            element.addClass('active');
+//            tapping = true;
+//        });
+//        element.bind('touchend', function (e) {
+//            element.removeClass('active');
+//            if (tapping) {
+//                scope.$apply(attrs['ngTap'], element);
+//            }
+//        });
+//    };
+//});
