@@ -200,7 +200,9 @@ app.controller('PrognozaController', function($scope, OWMSvc){
         $scope.prognoza = prognoza.list.filter(function(item){
             var itemTime = new Date(item.dt_txt).getTime();
             return itemTime > time;
-        }).slice(0, 4);
+        }) // samo prognoza posle sada (OWM šalje i jednu pre)
+        .slice(0, 4) // 4 komada stane
+        .reverse(); // reverse jer se u view radi float-right koji obrće redosled
     })
 });
 

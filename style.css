@@ -219,6 +219,9 @@ header{
     border-top: 1px solid #dfdfdf;
     background-color: #fafafa;
 }
+#prognozaWrap img{
+    width: 38px;
+}
 #prognozaWrap .boja{
     color: #8e44ad;
 }
@@ -227,15 +230,22 @@ header{
     float:left;
     margin-left: 5px;
 }
+#prognozaWrap .fr{
+    position: relative;
+    float: right;
+    margin-right: 5px;
+}
 #prognozaWrap p{
     font-size: 9px;
     text-align: center;
 }
 .prognozaItem {
-    top: -5px;
     width: 50px;
     height: 64px;
     text-align: center;
+}
+.pomeriMaloGore{
+    top: -5px;
 }
 .prognozaItem img{
     width: 38px;

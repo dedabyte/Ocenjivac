@@ -84,13 +84,16 @@
         </div>
         
         <div id="prognozaWrap" ng-controller="PrognozaController">
-            <img class="fl" ng-src="http://openweathermap.org/img/w/{{trenutnoStanje.weather[0].icon}}.png">
-            <div class="fl" style="margin-right: 5px;">
-                <p style="font-size:22px; margin: 7px 0 0"><span class="boja">{{trenutnoStanje.main.temp}}</span><small>°C</small></p>
+            <div class="fl pomeriMaloGore">
+                <img ng-src="http://openweathermap.org/img/w/{{trenutnoStanje.weather[0].icon}}.png">
+                <p class="description">{{trenutnoStanje.weather[0].description}}</p>
+            </div>            
+            <div class="fl">
+                <p style="font-size:22px; margin: 7px 0 0"><span class="boja">{{trenutnoStanje.main.temp  | number:1}}</span><small>°C</small></p>
                 <p>min: {{trenutnoStanje.main.temp_min | number:0}}</p>
                 <p>max: {{trenutnoStanje.main.temp_max | number:0}}</p>
             </div>
-            <div class="fl prognozaItem" ng-repeat="item in prognoza">
+            <div class="fr prognozaItem pomeriMaloGore" ng-repeat="item in prognoza">
                 <img ng-src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png">
                 <p class="description">
                     {{item.weather[0].description}}<br>
