@@ -222,9 +222,6 @@ header{
 #prognozaWrap img{
     width: 38px;
 }
-#prognozaWrap .boja{
-    color: #8e44ad;
-}
 #prognozaWrap .fl{
     position: relative;
     float:left;
@@ -255,6 +252,6 @@ header{
     width: 100%;
     bottom: 0;
 }
-
-
+.tab1 .obojeno { color: #27ae60 }
+.tab2 .obojeno { color: #8e44ad }
 
