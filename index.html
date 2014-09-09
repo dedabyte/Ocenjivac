@@ -85,7 +85,7 @@
         
         <div id="prognozaWrap" ng-controller="PrognozaController">
             <img class="fl" ng-src="http://openweathermap.org/img/w/{{trenutnoStanje.weather[0].icon}}.png">
-            <div class="fl" style="margin-right: 10px;">
+            <div class="fl" style="margin-right: 5px;">
                 <p style="font-size:22px; margin: 7px 0 0"><span class="boja">{{trenutnoStanje.main.temp}}</span><small>°C</small></p>
                 <p>min: {{trenutnoStanje.main.temp_min | number:0}}</p>
                 <p>max: {{trenutnoStanje.main.temp_max | number:0}}</p>
