@@ -5,14 +5,14 @@
     
     function OWMService($http, $q){
         // return
-        var OWMService = {
+        var owmService = {
             vratiSVE: vratiSVE,
             heandlujPrognozu: heandlujPrognozu
         }
         //
         
         var promises = [];
-
+        
         function vratiTrenutnoStanje(){
             var dfrd = $q.defer();
             $http({
@@ -45,14 +45,14 @@
         function heandlujPrognozu(prognoza){
             var time = new Date().getTime();
             return prognoza.list
-                .filter(function(item){  // samo prognoza posle sada (OWM šalje i jednu pre)
-                    var itemTime = new Date(item.dt_txt).getTime();
+                .filter(function(item){ // samo prognoza posle sadasnjih trenutnih podataka (OWM šalje i jednu pre)
+                    var itemTime = new Date(item.dt_txt).getTime(); // parsiranje datuma jer je sigurnije od time-a koji salju
                     return itemTime > time;
                 })
                 .slice(0, 4) // 4 komada stane
                 .reverse(); // reverse jer se u view radi float-right koji obrće redosled
         }
 
-        return OWMService;
+        return owmService;
     }
 })();
