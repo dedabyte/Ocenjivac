@@ -18,7 +18,7 @@ body {
     height: 100%;
     background-color: white;
     position: absolute;
-    padding-bottom: 60px;
+    padding-bottom: 70px;
 }
 
 #gore {
@@ -80,7 +80,7 @@ body {
 #dole {
     width: 100%;
     position: absolute;
-    bottom: 60px;
+    bottom: 70px;
 }
 #ocenaWrap {
     font-size: 150px;
@@ -214,7 +214,7 @@ header{
 #prognozaWrap{
     position: absolute;
     bottom: 0px;
-    height: 60px;
+    height: 70px;
     width: 100%;
     border-top: 1px solid #dfdfdf;
     background-color: #fafafa;
@@ -228,13 +228,13 @@ header{
     margin-left: 5px;
 }
 #prognozaWrap p{
-    font-size: 10px;
+    font-size: 9px;
     text-align: center;
 }
 .prognozaItem {
     top: -5px;
     width: 50px;
-    height: 60px;
+    height: 70px;
     text-align: center;
 }
 .prognozaItem img{
