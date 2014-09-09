@@ -1,4 +1,4 @@
-Ocenjivac
+Ocenjivač
 =========
 
-Helper za zaključivanje ocena.
+HTML5 mobilna aplikacija sa rasporedom časova, ocenjivačem i prognozom.

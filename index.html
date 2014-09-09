@@ -4,9 +4,7 @@
         <title>Ocenjivač</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <link href="style.css" rel="stylesheet" type="text/css">
-        <script src="angular.min.js"></script>
-        <script src="script.js"></script>
+        <link href="style/style.css" rel="stylesheet" type="text/css">
     </head>
     
     <body ng-app="app" ng-controller="MainController">
@@ -47,7 +45,7 @@
                 <table class="header-table">
                     <tbody>
                         <tr>
-                            <td class="shift-switcher" ng-tap="promeniSmenu()"><small>SMENA</small> {{ data.smena }}</td>
+                            <td class="shift-switcher" ng-tap="promeniSmenu()"><small>SMENA</small> {{data.smena}}</td>
         <!--                    <td class="day" ng-tap="promeniDan('pon')" ng-class="{selected: data.dan == 'pon'}">PON</td>-->
                             <td class="day" ng-tap="promeniDan('uto')" ng-class="{selected: data.dan == 'uto'}">UTO</td>
                             <td class="day" ng-tap="promeniDan('sre')" ng-class="{selected: data.dan == 'sre'}">SRE</td>
@@ -101,6 +99,17 @@
                 </p>
             </div>
         </div>
-        
+
+        <!-- scripts -->
+        <script src="angular/angular.min.js"></script>
+        <script src="angular/App.js"></script>
+        <script src="services/RasporedService.js"></script>
+        <script src="services/OWMService.js"></script>
+        <script src="directives/ngTapDirective.js"></script>
+        <script src="controllers/MainController.js"></script>
+        <script src="controllers/RasporedController.js"></script>
+        <script src="controllers/OcenjivacController.js"></script>
+        <script src="controllers/PrognozaController.js"></script>
+        <!-- scripts end -->
     </body>
 </html>
