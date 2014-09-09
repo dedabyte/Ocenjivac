@@ -18,12 +18,6 @@
         
         <div id="ocenjivacWrap" ng-controller="OcenjivacController" ng-show="tab == 1">
             <div id="gore">            
-<!--
-                <section id="heder">
-                    <div class="dugme" id="dugmePonisti" ng-tap="ponistiOcene()">PONIŠTI</div>
-                </section>            
-                <div class="clear"></div>
--->
                 <div id="hederLine"></div>
                 <section id="ocene">
                     <div class="ocena x" ng-tap="ponistiOcene($index)">X</div>
@@ -87,6 +81,22 @@
                 </table>
                 <div class="msg" ng-show="!data[data.dan]">Ti danas ne radiš... :)</div>
             </section>
+        </div>
+        
+        <div id="prognozaWrap" ng-controller="PrognozaController">
+            <img class="fl" ng-src="http://openweathermap.org/img/w/{{trenutnoStanje.weather[0].icon}}.png">
+            <div class="fl" style="margin-right: 10px;">
+                <p style="font-size:20px; margin: 3px 0"><span class="boja">{{trenutnoStanje.main.temp}}</span><small>°C</small></p>
+                <p>min: {{trenutnoStanje.main.temp_min | number:0}}</p>
+                <p>max: {{trenutnoStanje.main.temp_max | number:0}}</p>
+            </div>
+            <div class="fl prognozaItem" ng-repeat="item in prognoza">
+                <img ng-src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png">
+                <p class="description">
+                    {{item.weather[0].description}}<br>
+                    <span class="boja">{{item.dt_txt.split(' ')[1].slice(0,5)}}</span>
+                </p>
+            </div>
         </div>
         
     </body>

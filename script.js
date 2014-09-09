@@ -84,8 +84,8 @@ app.service('RasporedSvc', function () {
                 '3': { start: '15:25', end: '16:10'},
                 '4': { start: '16:20', end: '17:05'},
                 '5': { start: '17:10', end: '17:55'},
-                '6': { start: '18:00', end: '18:35'},
-                '7': { start: '18:40', end: '19:15'}
+                '6': { start: '18:00', end: '18:40'},
+                '7': { start: '18:45', end: '19:15'}
             }
         },
         skraceno: {
@@ -94,7 +94,7 @@ app.service('RasporedSvc', function () {
                 '2': { start: '08:35', end: '09:05'},
                 '3': { start: '09:10', end: '09:40'},
                 '4': { start: '09:50', end: '10:20'},
-                '5': { start: '10:20', end: '10:55'},
+                '5': { start: '10:25', end: '10:55'},
                 '6': { start: '11:00', end: '11:30'},
                 '7': { start: '11:35', end: '12:05'}
             },
@@ -149,17 +149,83 @@ app.controller('RasporedController', function ($scope, RasporedSvc) {
 
 
 
+// PROGNOZA
+app.service('OWMSvc', function($http, $q){
+    var promises = [];
+    
+    var vratiTrenutnoStanje = function(){
+        var dfrd = $q.defer();
+        $http({
+            method: 'GET',
+            url:'http://api.openweathermap.org/data/2.5/weather?id=3191429&units=metric'
+        }).success(function(data){
+            dfrd.resolve(data);
+        });
+        return dfrd.promise;
+    };
+    
+    var vratiPrognozu = function(){
+        var dfrd = $q.defer();
+        $http({
+            method: 'GET',
+            url:'http://api.openweathermap.org/data/2.5/forecast?id=3191429&units=metric'
+        }).success(function(data){
+            dfrd.resolve(data);
+        });
+        return dfrd.promise;
+    };
+
+    return {
+        vratiSVE: function(){
+            promises = [];
+            promises.push(vratiTrenutnoStanje());
+            promises.push(vratiPrognozu());
+            return $q.all(promises);
+        }
+    }
+});
+
+app.controller('PrognozaController', function($scope, OWMSvc){
+    $scope.trenutnoStanje = {};
+    $scope.prognoza = [];
+    
+    OWMSvc.vratiSVE().then(function(aData){
+        console.log(aData[0]);
+        console.log(aData[1]);
+        // popuni trenutno stanje
+        $scope.trenutnoStanje = aData[0];
+        // popuni prognozu
+        var prognoza = aData[1],
+            time = new Date().getTime();
+        $scope.prognoza = prognoza.list.filter(function(item){
+            var itemTime = new Date(item.dt_txt).getTime();
+            return itemTime > time;
+        }).slice(0, 4);
+    })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //app.directive('ngTap', function () {
 //    return function (scope, element, attrs) {
 //        var tapping = false;
 //        element.bind('touchstart', function (e) {
-//            element.addClass('active');
 //            tapping = true;
 //        });
 //        element.bind('touchend', function (e) {
-//            element.removeClass('active');
 //            if (tapping) {
 //                scope.$apply(attrs['ngTap'], element);
 //            }
