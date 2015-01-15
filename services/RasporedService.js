@@ -76,7 +76,7 @@
             var yearStart = new Date(d.getFullYear(),0,1);
             var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
             // ---
-            return weekNo % 2 === 0 ? '1' : '2'; // parna prepodne (prva smena, 1), neparna popodne (druga smena, 2)
+            return weekNo % 2 === 0 ? '2' : '1'; // parna popodne (druga smena, 2), neparna prepodne (prva smena, 1)
         }
         
         function getVremeCasa(redniBrojCasa, isPocetak){
