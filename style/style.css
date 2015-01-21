@@ -168,7 +168,7 @@ header{
 }
 
 .day{
-    width: 18%;
+    width: 12%;
 }
 .day.selected {
     background-color: #8e44ad;
@@ -184,7 +184,7 @@ header{
 
 .schedule-table{
     width: 100%;
-    border-spacing: 0px;
+    border-spacing: 0;
     text-align: center;
 }
 .schedule-table th {
