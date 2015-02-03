@@ -11,7 +11,7 @@
             smena: vratiSmenu(),
             tipSmene: 'skraceno',
             dan: vratiDanasnjiDan(),
-			      pon: [{},{ razred: 'E31', ucionica: '6' },{ razred: 'M22', ucionica: '10' },{ razred: 'M22', ucionica: '10' },{},{},{}],
+			      pon: [{ razred: 'E31', ucionica: '6' },{},{ razred: 'M22', ucionica: '10' },{ razred: 'M22', ucionica: '10' },{},{},{}],
             uto: [{},{},{},{},{ razred: 'M32', ucionica: '3' },{ razred: 'M32', ucionica: '3' },{ razred: 'M22', ucionica: '12' }],
             sre: [{ razred: 'M23/E22', ucionica: '2P' },{ razred: 'M23/E22', ucionica: '2P' },{ razred: 'ČOS', ucionica: '2P' },{ razred: 'M11', ucionica: '2P' },{ razred: 'M11', ucionica: '2P' },{ razred: 'E21', ucionica: '2' },{}],
             cet: [{ razred: 'E21', ucionica: '2' },{ razred: 'E21', ucionica: '2' },{ razred: 'M32', ucionica: '11' },{ razred: 'M11', ucionica: '4' },{},{},{}],
