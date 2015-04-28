@@ -9,7 +9,7 @@
         // return
         var rasporedSvc = { 
             smena: vratiSmenu(),
-            tipSmene: 'skraceno',
+            tipSmene: 'normalno',
             dan: vratiDanasnjiDan(),
 			      pon: [{ razred: 'E31', ucionica: '6' },{},{ razred: 'M22', ucionica: '10' },{ razred: 'M22', ucionica: '10' },{},{},{}],
             uto: [{},{},{},{},{ razred: 'M32', ucionica: '3' },{ razred: 'M32', ucionica: '3' },{ razred: 'M22', ucionica: '12' }],
